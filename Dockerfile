@@ -32,6 +32,7 @@ RUN apk update  \
     && rm -f index.html \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
     && /usr/bin/composer create-project laravel/laravel /var/www/localhost/htdocs --no-progress --prefer-dist \
+    && composer install \
     && chown -R apache:apache /var/www
 
 USER apache
