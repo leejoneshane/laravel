@@ -13,7 +13,7 @@ WORKDIR /var/www/localhost/htdocs
 RUN apk update  \
     && apk add --no-cache git curl certbot acme-client openssl mysql-client apache2 apache2-ssl php7-apache2 \
                           php7-curl php7-openssl php7-json php7-phar php7-dom php7-mysqlnd php7-pdo_mysql \
-                          php7-mcrypt php7-ctype php7-xml python \
+                          php7-mcrypt php7-ctype php7-xml php7-mbstring python \
     && mkdir /run/apache2 \
     && sed -ri \
            -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
