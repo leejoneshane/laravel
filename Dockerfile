@@ -38,6 +38,7 @@ RUN apk update  \
     && composer require webpatser/laravel-uuid \
     && composer require dingo/api \
     && composer require tymon/jwt-auth \
+    && composer require tcg/voyager \
     && composer install \
     && chown -R apache:apache /var/www
 
