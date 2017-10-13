@@ -33,11 +33,11 @@ RUN apk update  \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
     && /usr/bin/composer create-project laravel/laravel /var/www/localhost/htdocs --no-progress --prefer-dist \
     && composer require cloudcreativity/laravel-json-api \
-    && composer require laravel/passport \
-    && composer require spatie/laravel-permission \
-    && composer require webpatser/laravel-uuid \
-    && composer require tymon/jwt-auth \
-    && composer require tcg/voyager \
+                        laravel/passport \
+                        spatie/laravel-permission \
+                        webpatser/laravel-uuid \
+                        tymon/jwt-auth \
+                        tcg/voyager \
     && composer install \
     && chown -R apache:apache /var/www
 
