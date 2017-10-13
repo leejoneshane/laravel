@@ -36,7 +36,6 @@ RUN apk update  \
     && composer require laravel/passport \
     && composer require spatie/laravel-permission \
     && composer require webpatser/laravel-uuid \
-    && composer require dingo/api \
     && composer require tymon/jwt-auth \
     && composer require tcg/voyager \
     && composer install \
