@@ -11,9 +11,9 @@ ADD gencerts.sh /usr/local/bin/
 WORKDIR /var/www/localhost/htdocs
 
 RUN apk update  \
-    && apk add --no-cache git zlib zip curl certbot acme-client openssl mysql-client apache2 apache2-ssl python php7-apache2 \
+    && apk add --no-cache git zip curl certbot acme-client openssl mysql-client apache2 apache2-ssl python php7-apache2 \
                           php7-curl php7-openssl php7-json php7-phar php7-dom php7-mysqlnd php7-pdo_mysql php7-iconv \
-                          php7-mcrypt php7-ctype php7-xml php7-mbstring php7-tokenizer php7-session php7-fileinfo \
+                          php7-mcrypt php7-ctype php7-xml php7-mbstring php7-tokenizer php7-session php7-fileinfo php7-zlib \
     && mkdir /run/apache2 \
     && sed -ri \
            -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
