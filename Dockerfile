@@ -39,7 +39,6 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && composer install \
     && chown -R apache:apache /var/www
 
-USER apache
 VOLUME /var/www/localhost/htdocs
 EXPOSE 80 443 
 CMD ["docker-entrypoint.sh"]
