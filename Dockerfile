@@ -34,9 +34,6 @@ RUN apk update  \
     && /usr/bin/composer create-project laravel/laravel /var/www/localhost/htdocs --no-progress --prefer-dist \
     && composer require cloudcreativity/laravel-json-api \
                         laravel/passport \
-                        spatie/laravel-permission \
-                        webpatser/laravel-uuid \
-                        tymon/jwt-auth \
                         tcg/voyager \
     && composer install \
     && chown -R apache:apache /var/www
