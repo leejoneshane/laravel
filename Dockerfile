@@ -46,7 +46,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         cloudcreativity/laravel-json-api \
                         laravel/passport \
                         tcg/voyager \
-    && composer suggests | xargs -i composer require {}
+    && composer suggests | xargs -I '{}' composer require '{}'
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
