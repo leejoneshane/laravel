@@ -6,6 +6,8 @@ ENV DB_HOST db
 ENV DB_DATABASE laravel
 ENV DB_USERNAME laraveluser
 ENV DB_PASSWORD password
+ENV REDIS_HOST redis
+ENV REDIS_PASSWORD null
 ADD docker-entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
 WORKDIR /var/www/localhost/htdocs
@@ -35,7 +37,9 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && rm -f index.html \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
     && /usr/bin/composer create-project laravel/laravel /var/www/localhost/htdocs --no-progress --prefer-dist \
-    && composer require cloudcreativity/laravel-json-api \
+    && composer require predis/predis \
+                        lucadegasperi/oauth2-server-laravel \
+                        cloudcreativity/laravel-json-api \
                         laravel/passport \
                         tcg/voyager \
     && chown -R apache:apache /var/www
