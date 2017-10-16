@@ -17,7 +17,7 @@ WORKDIR /var/www/localhost/htdocs
 
 RUN chmod 755 /usr/local/bin/*.sh \
     && apk update  \
-    && apk add --no-cache sudo git zip curl certbot acme-client openssl ca-certificates \
+    && apk add --no-cache sudo git zip curl certbot acme-client openssl ca-certificates findutils \
                           mysql-client apache2 apache2-ssl python php7-apache2 \
                           php7-curl php7-openssl php7-json php7-phar php7-dom php7-mysqlnd php7-pdo_mysql php7-iconv \
                           php7-mcrypt php7-ctype php7-xml php7-mbstring php7-tokenizer php7-session php7-fileinfo php7-zlib \
@@ -46,6 +46,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         cloudcreativity/laravel-json-api \
                         laravel/passport \
                         tcg/voyager \
+    && composer suggests | xargs -i composer require {}
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
