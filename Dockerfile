@@ -17,6 +17,9 @@ RUN chmod 755 /usr/local/bin/*.sh \
                           php7-mcrypt php7-ctype php7-xml php7-mbstring php7-tokenizer php7-session php7-fileinfo php7-zlib \
     && mkdir /run/apache2 \
     && sed -ri \
+           -e "s!^(\s*ServerAdmin).*$!\1 ${MAIL}!g" \
+           -e 's!^(\s*DocumentRoot) "/var/www/localhost/htdocs"$!\1 "/var/www/localhost/htdocs/public"!g' \
+           -e 's!^(\s*<Directory ) "/var/www/localhost/htdocs">$!\1 "/var/www/localhost/htdocs/public">!g' \           
            -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
            -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
            -e 's!^#(LoadModule rewrite_module .*)$!\1!g' \
