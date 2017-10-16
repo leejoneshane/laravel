@@ -1,13 +1,13 @@
 FROM alpine
 
 ENV DOMAIN server.tld
-ENV MAIL your@mail.addr
+ENV MAIL admin@admin.com
 ENV WEB_PASSWORD password
 ENV TZ Asia/Taipei
 ENV DB_HOST db
 ENV DB_PORT 3306
 ENV DB_DATABASE laravel
-ENV DB_USERNAME laraveluser
+ENV DB_USERNAME root
 ENV DB_PASSWORD password
 ENV REDIS_HOST redis
 ENV REDIS_PORT 6379
