@@ -3,10 +3,12 @@ FROM alpine
 ENV MAIL your@mail.addr
 ENV DOMAIN server.tld
 ENV DB_HOST db
+ENV DB_PORT 3306
 ENV DB_DATABASE laravel
 ENV DB_USERNAME laraveluser
 ENV DB_PASSWORD password
 ENV REDIS_HOST redis
+ENV REDIS_PORT 6379
 ENV REDIS_PASSWORD null
 ADD docker-entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
@@ -45,10 +47,12 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
+           -e '/^DB_PORT=/d' \
            -e '/^DB_DATABASE=/d' \
            -e '/^DB_USERNAME=/d' \
            -e '/^DB_PASSWORD=/d' \
            -e '/^REDIS_HOST=/d' \
+           -e '/^REDIS_PORT=/d' \
            -e '/^REDIS_PASSWORD=/d' \
            /var/www/localhost/htdocs/.env
 
