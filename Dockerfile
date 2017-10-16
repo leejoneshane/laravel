@@ -42,7 +42,15 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         cloudcreativity/laravel-json-api \
                         laravel/passport \
                         tcg/voyager \
-    && chown -R apache:apache /var/www
+    && chown -R apache:apache /var/www \
+    && sed -ri \
+           -e '/^DB_HOST=/d' \
+           -e '/^DB_DATABASE=/d' \
+           -e '/^DB_USERNAME=/d' \
+           -e '/^DB_PASSWORD=/d' \
+           -e '/^REDIS_HOST=/d' \
+           -e '/^REDIS_PASSWORD=/d' \
+           /var/www/localhost/htdocs/.env
 
 VOLUME /var/www/localhost/htdocs
 EXPOSE 80 443 
