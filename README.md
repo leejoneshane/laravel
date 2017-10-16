@@ -25,15 +25,25 @@ docker run --name=laravel -p 80:80 -p 443:443 -d leejoneshane/laravel
 You should use __Kimatic__ or use -e parameter in docker command to defind the environment variable list below to tell laravel container how to start:
 
 __MAIL=admin@admin.com__ This will be your admin account.
+
 __WEB_PASSWORD=your.password__ You need to change it.
+
 __DB_HOST=172.17.0.2__ Link to mysql container.
+
 __DB_PORT=3306__ If you use another port change this, or you can bypass it.
+
 __DB_DATABASE=laravel__ If you use another name change this, or you can bypass it.
+
 __DB_USERNAME=root__ If you use another account change this, or you can bypass it.
+
 __DB_PASSWORD=should.match.MYSQL_ROOT_PASSWORD__ You must change it.
+
 __REDIS_HOST=172.17.0.3__ Link to redis container.
+
 __REDIS_PORT=6379__ If you use another port change this, or you can bypass it.
+
 __REDIS_PASSWORD=null__ If you setup password for redis change it, or you can bypass it.
+
 
 # Work with SSL
 
