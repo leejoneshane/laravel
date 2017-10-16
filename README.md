@@ -54,6 +54,7 @@ __DOMAIN=the.site.fqdn__
 Then you should conect to the container's console, command below:
 
 docker exec laravel bash
+
 #>gencerts.sh
 
 Wait a second you should get your SSL certificate.
