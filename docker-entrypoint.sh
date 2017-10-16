@@ -3,6 +3,7 @@ set -euo pipefail
 
 if [[ "${DB_HOST}" != "db" ]]; then
   php artisan voyager:install --with-dummy
+  php artisan storage:link
   chown -R apache:apache /var/www
 fi
 
