@@ -7,6 +7,7 @@ fi
 
 if [[ "${DB_HOST}" != "db" ]]; then
   php artisan migrate:install
+  php artisan voyager:install
 fi
 
 rm -f /run/apache2/httpd.pid
