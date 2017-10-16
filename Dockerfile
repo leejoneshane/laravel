@@ -17,13 +17,10 @@ WORKDIR /var/www/localhost/htdocs
 
 RUN chmod 755 /usr/local/bin/*.sh \
     && apk update  \
-    && apk add --no-cache sudo git zip curl certbot acme-client openssl ca-certificates locales \
+    && apk add --no-cache sudo git zip curl certbot acme-client openssl ca-certificates \
                           mysql-client apache2 apache2-ssl python php7-apache2 \
                           php7-curl php7-openssl php7-json php7-phar php7-dom php7-mysqlnd php7-pdo_mysql php7-iconv \
                           php7-mcrypt php7-ctype php7-xml php7-mbstring php7-tokenizer php7-session php7-fileinfo php7-zlib \
-    && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
-    && locale-gen "zh_TW.UTF-8" \
-    && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && mkdir /run/apache2 \
     && sed -ri \
