@@ -7,7 +7,7 @@ fi
 
 if [[ "${MAIL}" != "your@mail.addr" ]]; then
   sed -ri -e "s/^(\s*ServerAdmin).*$/\1 ${MAIL}/g" /etc/apache2/httpd.conf
-  php artisan voyager:admin ${MAIL} --create
+  echo -e "admin\n${WEB_PASSWORD}\n" | php artisan voyager:admin ${MAIL} --create
 fi
 
 rm -f /run/apache2/httpd.pid
