@@ -22,7 +22,7 @@ docker run --name=laravel -p 80:80 -p 443:443 -d leejoneshane/laravel
 
 # First time running
 
-You should use __Kimatic__ or use -e parameter in docker command to defind the environment variable list below to tell laravel container how to start:
+You should use __Kitematic__ or use -e parameter in docker command to defind the environment variable list below to tell laravel container how to start:
 
 __MAIL=admin@admin.com__ This will be your admin account.
 
