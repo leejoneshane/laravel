@@ -39,7 +39,6 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && composer require cloudcreativity/laravel-json-api \
                         laravel/passport \
                         tcg/voyager \
-    && composer install \
     && chown -R apache:apache /var/www
 
 VOLUME /var/www/localhost/htdocs
