@@ -2,7 +2,7 @@ FROM alpine
 
 ENV DOMAIN server.tld
 ENV MAIL your@mail.addr
-ENV ADMIN_PASSWORD password
+ENV WEB_PASSWORD password
 ENV TZ Asia/Taipei
 ENV DB_HOST db
 ENV DB_PORT 3306
