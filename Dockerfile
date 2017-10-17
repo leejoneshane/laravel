@@ -12,6 +12,8 @@ ENV DB_PASSWORD password
 ENV REDIS_HOST redis
 ENV REDIS_PORT 6379
 ENV REDIS_PASSWORD null
+ENV CACHE_DRIVER redis
+ENV SESSION_DRIVER redis
 ADD docker-entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
 WORKDIR /var/www/localhost/htdocs
@@ -55,6 +57,8 @@ RUN chmod 755 /usr/local/bin/*.sh \
            -e '/^REDIS_HOST=/d' \
            -e '/^REDIS_PORT=/d' \
            -e '/^REDIS_PASSWORD=/d' \
+           -e '/^CACHE_DRIVER=/d' \
+           -e '/^SESSION_DRIVER=/d' \
            /var/www/localhost/htdocs/.env
 
 VOLUME /var/www/localhost/htdocs
