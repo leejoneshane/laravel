@@ -44,6 +44,10 @@ __REDIS_PORT=6379__ If you use another port change this, or you can bypass it.
 
 __REDIS_PASSWORD=null__ If you setup password for redis change it, or you can bypass it.
 
+__CACHE_DRIVER=redis__ If you don't want to use redis, change it to __file__.
+
+__SESSION_DRIVER=redis__ If you don't want to use redis, change it to __file__.
+
 <div align="center">
 <img src="https://github.com/leejoneshane/laravel/blob/master/kitematic.png?raw=true">
 </div>
