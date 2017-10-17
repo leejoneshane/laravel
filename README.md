@@ -47,17 +47,19 @@ __REDIS_PASSWORD=null__ If you setup password for redis change it, or you can by
 
 # Work with SSL
 
-This image can use letsencrypt SSL certificate, but before send request to letsencrypt, you should registered a FQDN, and complete DNS configuration. use the environment variable below to tell the container:
+This image can use letsencrypt SSL certificate, but before send request to letsencrypt, you should registered a FQDN and complete DNS configuration. use the environment variable below to tell the container:
 
 __DOMAIN=the.site.fqdn__
 
-Then you should conect to the container's console, command below:
+Then you should lunch to the container's console, command below:
 
 docker exec laravel bash
 
+And run the script to get SSL certificate:
+
 #>gencerts.sh
 
-Wait a second you should get your SSL certificate.
+Wait a second you should get your certificate.
 
 # Login to admin panel
 
