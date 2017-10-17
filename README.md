@@ -5,21 +5,21 @@ The size just 88MB since it build on Alpine.
 
 # How to use
 This image not include database and redis. You should run mysql first, like below:
-
+```
 docker run -e __MYSQL_ROOT_PASSWORD__=your.password -e __MYSQL_DATABASE__=laravel -d mysql
-
+```
 If this is the first container on your computer, then it's ip will be 172.17.0.2.
 
 Then you should run redis secondary, like below:
-
+```
 docker run -d redis
-
+```
 If this is the second container on your computer, then it's ip will be 172.17.0.3.
 
 Now, you can lunch laravel like below:
-
+```
 docker run --name=laravel -p 80:80 -p 443:443 -d leejoneshane/laravel
-
+```
 # First time running
 
 You should use __Kitematic__ or use -e parameter in docker command to defind the environment variable list below to tell laravel container how to start:
@@ -51,14 +51,11 @@ This image can use letsencrypt SSL certificate, but before send request to letse
 
 __DOMAIN=the.site.fqdn__
 
-Then you should lunch to the container's console, command below:
-
+Then you should lunch the container's console, And run the script named gencerts.sh to get SSL certificate::
+```
 docker exec laravel bash
-
-And run the script to get SSL certificate:
-
-#>gencerts.sh
-
+\#>gencerts.sh
+```
 Wait a second you should get your certificate.
 
 # Login to admin panel
