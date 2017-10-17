@@ -44,7 +44,9 @@ __REDIS_PORT=6379__ If you use another port change this, or you can bypass it.
 
 __REDIS_PASSWORD=null__ If you setup password for redis change it, or you can bypass it.
 
-<img src=https://github.com/leejoneshane/laravel/blob/master/kitematic.png?raw=true>
+<div align="center">
+<img src="https://github.com/leejoneshane/laravel/blob/master/kitematic.png?raw=true">
+</div>
 
 # Work with SSL
 
