@@ -6,7 +6,7 @@ The size just 88MB since it build on Alpine.
 # How to use
 This image not include database and redis. You should run mysql first, like below:
 ```
-docker run -e __MYSQL_ROOT_PASSWORD__=your.password -e __MYSQL_DATABASE__=laravel -d mysql
+docker run -e MYSQL_ROOT_PASSWORD=your.password -e MYSQL_DATABASE=laravel -d mysql
 ```
 If this is the first container on your computer, then it's ip will be 172.17.0.2.
 
