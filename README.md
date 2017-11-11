@@ -1,5 +1,5 @@
 # laravel
-This is a docker image for PHP framework: laravel, it has pre-installed predis/predis(for redis cache), cloudcreativity/laravel-json-api, laravel/passport(for OAUTH2 server), tcg/voyager(the powerful admin panel).
+This is a docker image for PHP framework: laravel, it has pre-installed predis/predis(for redis cache), laravel/socialite(OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub and Bitbucket.), laravel/passport(to develop OAUTH2 server.), guzzlehttp/guzzle(a PHP HTTP client and framework for building web service clients.), tcg/voyager(the powerful admin panel).
 
 The size just 88MB since it build on Alpine.
 
