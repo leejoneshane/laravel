@@ -1,0 +1,44 @@
+version: '2'
+services:
+  redis:
+    image: redis
+    container_name: redis
+    
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: laravel
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: sqladmin
+    ports:
+      - "8080:80"
+    links:
+      - mysql:db
+
+  laravel:
+    image: leejoneshane/laravel
+    container_name: web
+    environment:
+      DOMAIN: www.your.com
+      MAIL: leejoneshane@gmail.com
+      WEB_PASSWORD: 123456
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: null
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: root
+      DB_PASSWORD: 123456
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - mysql:db
+      - redis:cache
