@@ -1,5 +1,6 @@
 #!/bin/sh
 set -euo pipefail
+cd /var/www/localhost/htdocs
 
 if [[ "${DB_HOST}" != "db" ]]; then
   php artisan voyager:install --with-dummy
