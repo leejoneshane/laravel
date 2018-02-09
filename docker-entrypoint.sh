@@ -5,6 +5,7 @@ if [ ! -f /var/www/localhost/database_is_ready ]; then
   php artisan voyager:install --with-dummy
   chown -R apache:apache /var/www
   touch /var/www/localhost/database_is_ready
+  php artisan make:auth
 
   if [[ "${MAIL}" != "your@mail.addr" ]]; then
     sed -ri -e "s/^(\s*ServerAdmin).*$/\1 ${MAIL}/g" /etc/apache2/httpd.conf
