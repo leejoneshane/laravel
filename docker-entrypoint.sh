@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [ ! -f /var/www/localhost/database_is_ready ]; then
-  php artisan voyager:install --with-dummy
+#  php artisan voyager:install --with-dummy
   chown -R apache:apache /var/www
   touch /var/www/localhost/database_is_ready
   php artisan make:auth
