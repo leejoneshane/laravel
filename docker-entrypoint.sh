@@ -1,8 +1,16 @@
 #!/bin/sh
 set -euo pipefail
 
-if [ ! -e /var/www/localhost/htdocs/server.php ]; then
+if [ ! -e /var/www/localhost/htdocs/artisan ]; then
   cp -Rp /root/htdocs/* /var/www/localhost/htdocs
+else
+  cd /root/htdocs
+  newver=$(php artisan --version)
+  cd /var/www/localhost/htdocs
+  ver=$(php artisan --version)
+  if [ "$ver" != "$newver" ]; then
+    cp -Rp /root/htdocs/* /var/www/localhost/htdocs
+  fi
 fi
 
 if [ ! -e /var/www/localhost/database_is_ready ]; then
