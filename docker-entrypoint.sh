@@ -1,7 +1,11 @@
 #!/bin/sh
 set -euo pipefail
 
-if [ ! -f /var/www/localhost/database_is_ready ]; then
+if [ ! -e /var/www/localhost/htdocs/server.php ]; then
+  cp -Rp /root/htdocs/* /var/www/localhost/htdocs
+fi
+
+if [ ! -e /var/www/localhost/database_is_ready ]; then
 #  php artisan voyager:install --with-dummy
   chown -R apache:apache /var/www
   touch /var/www/localhost/database_is_ready
