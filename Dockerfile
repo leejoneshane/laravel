@@ -59,7 +59,8 @@ RUN chmod 755 /usr/local/bin/*.sh \
            -e '/^REDIS_PASSWORD=/d' \
            -e '/^CACHE_DRIVER=/d' \
            -e '/^SESSION_DRIVER=/d' \
-           /var/www/localhost/htdocs/.env
+           /var/www/localhost/htdocs/.env \
+    && cp -Rp /var/www/localhost/htdocs /root
 
 VOLUME /var/www/localhost/htdocs
 EXPOSE 80 443 
