@@ -3,6 +3,7 @@ set -euo pipefail
 
 if [ ! -e /var/www/localhost/htdocs/artisan ]; then
   cp -Rp /root/htdocs/* /var/www/localhost/htdocs
+  cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 else
   cd /root/htdocs
   newver=$(php artisan --version)
@@ -10,6 +11,7 @@ else
   ver=$(php artisan --version)
   if [ "$ver" != "$newver" ]; then
     cp -Rp /root/htdocs/* /var/www/localhost/htdocs
+    cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
   fi
 fi
 
