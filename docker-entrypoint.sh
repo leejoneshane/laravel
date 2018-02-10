@@ -18,7 +18,7 @@ if [ ! -e /var/www/localhost/database_is_ready ]; then
   chown -R apache:apache /var/www
   touch /var/www/localhost/database_is_ready
   php artisan migrate:refresh
-  php artisan vendor:publish
+  echo -e "0" | php artisan vendor:publish
   php artisan make:auth
 
   if [[ "${MAIL}" != "your@mail.addr" ]]; then
