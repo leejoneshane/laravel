@@ -42,7 +42,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
        \
     && rm -f index.html \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
-    && /usr/bin/composer create-project laravel/laravel /var/www/localhost/htdocs --no-progress --prefer-dist \
+    && /usr/bin/composer create-project laravel/laravel /var/www/localhost/htdocs --no-progress --prefer-dist "5.5.*" \
     && composer require predis/predis \
                         laravel/socialite \
                         laravel/passport \
