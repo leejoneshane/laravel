@@ -15,10 +15,10 @@ else
   fi
 fi
 
-if [ ! -e /var/www/localhost/database_is_ready ]; then
+if [ ! -e /var/www/localhost/htdocs/database_is_ready ]; then
 #  php artisan voyager:install --with-dummy
   chown -R apache:apache /var/www
-  touch /var/www/localhost/database_is_ready
+  touch /var/www/localhost/htdocs/database_is_ready
   echo -e "yes\nyes\nyes\n" | php artisan migrate:refresh
   echo -e "0" | php artisan vendor:publish
   php artisan make:auth
