@@ -4,15 +4,15 @@ set -euo pipefail
 if [ ! -e /var/www/localhost/htdocs/artisan ]; then
   cp -Rp /root/htdocs/* /var/www/localhost/htdocs
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
-else
-  cd /root/htdocs
-  newver=$(php artisan --version)
-  cd /var/www/localhost/htdocs
-  ver=$(php artisan --version)
-  if [ "$ver" != "$newver" ]; then
-    cp -Rp /root/htdocs/* /var/www/localhost/htdocs
-    cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
-  fi
+#else
+#  cd /root/htdocs
+#  newver=$(php artisan -V)
+#  cd /var/www/localhost/htdocs
+#  ver=$(php artisan -V)
+#  if [ $ver -lt $newver ]; then
+#    cp -Rp /root/htdocs/* /var/www/localhost/htdocs
+#    cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
+#  fi
 fi
 
 if [ ! -e /var/www/localhost/htdocs/database_is_ready ]; then
