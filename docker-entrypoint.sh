@@ -7,9 +7,11 @@ if [ ! -e /var/www/localhost/htdocs/artisan ]; then
 #else
 #  cd /root/htdocs
 #  newver=$(php artisan -V)
+#  newver=${newver:18}
 #  cd /var/www/localhost/htdocs
 #  ver=$(php artisan -V)
-#  if [ $ver -lt $newver ]; then
+#  ver=${ver:18}
+#  if [ $ver < $newver ]; then
 #    cp -Rp /root/htdocs/* /var/www/localhost/htdocs
 #    cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 #  fi
