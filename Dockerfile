@@ -1,5 +1,7 @@
 FROM alpine
 
+ENV FETCH no
+ENV INIT no
 ENV DOMAIN server.tld
 ENV MAIL admin@admin.com
 ENV WEB_PASSWORD password
