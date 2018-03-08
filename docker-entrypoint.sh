@@ -1,26 +1,14 @@
 #!/bin/sh
 set -euo pipefail
 
-if [ ! -e /var/www/localhost/htdocs/artisan ]; then
+if [ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]; then
   cp -Rp /root/htdocs/* /var/www/localhost/htdocs
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
-#else
-#  cd /root/htdocs
-#  newver=$(php artisan -V)
-#  newver=${newver:18}
-#  cd /var/www/localhost/htdocs
-#  ver=$(php artisan -V)
-#  ver=${ver:18}
-#  if [ $ver < $newver ]; then
-#    cp -Rp /root/htdocs/* /var/www/localhost/htdocs
-#    cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
-#  fi
 fi
 
-if [ ! -e /var/www/localhost/htdocs/database_is_ready ]; then
+if [ "${INIT}" == "yes" ]; then
 #  php artisan voyager:install --with-dummy
   chown -R apache:apache /var/www
-  touch /var/www/localhost/htdocs/database_is_ready
   echo -e "yes\nyes\nyes\n" | php artisan migrate:refresh
   echo -e "0" | php artisan vendor:publish
   php artisan make:auth
