@@ -24,6 +24,8 @@ docker run --name=laravel -p 80:80 -p 443:443 -d leejoneshane/laravel
 
 You should use __Kitematic__ or use -e parameter in docker command to defind the environment variable list below to tell laravel container how to start:
 
+* __FETCH=no__ If your mount volume is empty, change to "yes" will fix the problem.
+* __INIT=no__ If you want to initialization your database, set to "yes".
 * __MAIL=admin@admin.com__ This will be your admin account.
 * __WEB_PASSWORD=your.password__ You need to change it.
 * __DB_HOST=172.17.0.2__ Link to mysql container.
