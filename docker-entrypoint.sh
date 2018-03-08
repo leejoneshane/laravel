@@ -6,7 +6,7 @@ if [[ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]]; then
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 fi
 
-if [ "${INIT}" == "yes" ]; then
+if [[ "${INIT}" == "yes" ]]; then
 #  php artisan voyager:install --with-dummy
   chown -R apache:apache /var/www
   echo -e "yes\nyes\nyes\n" | php artisan migrate:refresh
