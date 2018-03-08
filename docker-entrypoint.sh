@@ -1,7 +1,7 @@
 #!/bin/sh
 set -euo pipefail
 
-if [ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]; then
+if [[ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]]; then
   cp -Rp /root/htdocs/* /var/www/localhost/htdocs
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 fi
