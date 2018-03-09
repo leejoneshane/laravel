@@ -29,8 +29,8 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && mkdir /run/apache2 \
     && sed -ri \
-           -e 's!^(\s*DocumentRoot) "/var/www/localhost/htdocs"$!\1 "/var/www/localhost/htdocs/public"!g' \
-           -e 's!^(\s*<Directory ) "/var/www/localhost/htdocs">$!\1 "/var/www/localhost/htdocs/public">!g' \
+           -e 's!^DocumentRoot "/var/www/localhost/htdocs"$!DocumentRoot "/var/www/localhost/htdocs/public"!g' \
+           -e 's!^<Directory "/var/www/localhost/htdocs">$!<Directory "/var/www/localhost/htdocs/public">!g' \
            -e 's!^#(LoadModule rewrite_module .*)$!\1!g' \
            -e 's!^(\s*AllowOverride) None.*$!\1 All!g' \
            "/etc/apache2/httpd.conf" \
