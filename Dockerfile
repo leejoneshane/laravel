@@ -37,7 +37,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
        \
     && sed -ri \
            -e 's!^DocumentRoot "/var/www/localhost/htdocs"$!DocumentRoot "/var/www/localhost/htdocs/public"!g' \
-           -e 's!^(\s*AllowOverride) None.*$!\1 All!g' \
+           -e 's!^ServerName .*$!ServerName localhost\nAllowOverride All!g' \
            "/etc/apache2/conf.d/ssl.conf" \
        \
     && sed -ri \
