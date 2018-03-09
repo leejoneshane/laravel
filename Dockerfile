@@ -36,6 +36,11 @@ RUN chmod 755 /usr/local/bin/*.sh \
            "/etc/apache2/httpd.conf" \
        \
     && sed -ri \
+           -e 's!^DocumentRoot "/var/www/localhost/htdocs"$!DocumentRoot "/var/www/localhost/htdocs/public"!g' \
+           -e 's!^(\s*AllowOverride) None.*$!\1 All!g' \
+           "/etc/apache2/conf.d/ssl.conf" \
+       \
+    && sed -ri \
            -e 's!^(max_execution_time = )(.*)$!\1 72000!g' \
            -e 's!^(post_max_size = )(.*)$!\1 16M!g' \
            -e 's!^(upload_max_filesize = )(.*)$!\1 16M!g' \
