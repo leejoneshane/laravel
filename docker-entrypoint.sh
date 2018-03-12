@@ -7,6 +7,12 @@ if [[ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]]; then
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 fi
 
+if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} ${DB_DATABASE}; then
+  echo "database exist!"
+else
+  php artisan migrate
+fi
+
 if [[ "${INIT}" == "yes" ]]; then
 #  php artisan voyager:install --with-dummy
   echo -e "yes\nyes\nyes\n" | php artisan migrate:refresh
