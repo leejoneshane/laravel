@@ -11,6 +11,7 @@ if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} $
   echo "database exist!"
 else
   php artisan migrate
+  php artisan passport:install
 fi
 
 if [[ "${INIT}" == "yes" ]]; then
