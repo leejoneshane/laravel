@@ -7,8 +7,8 @@ if [[ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]]; then
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 fi
 
-if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} ${DB_DATABASE}; then
-  echo "database exist!"
+if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} ${DB_DATABASE} users; then
+  echo "database ready!"
 else
   php artisan migrate
   php artisan passport:install
