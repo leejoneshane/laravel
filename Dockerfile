@@ -18,6 +18,7 @@ ENV CACHE_DRIVER redis
 ENV SESSION_DRIVER redis
 ADD docker-entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
+ADD composer.json /usr/local/bin/
 WORKDIR /var/www/localhost/htdocs
 
 RUN chmod 755 /usr/local/bin/*.sh \
@@ -50,10 +51,12 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && rm -f index.html \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
     && /usr/bin/composer create-project --no-progress --prefer-dist laravel/laravel /var/www/localhost/htdocs \
+    && cp /usr/local/bin/composer.json /var/www/localhost/htdocs \
     && composer require predis/predis \
                         laravel/socialite \
                         laravel/passport \
                         guzzlehttp/guzzle \
+                        kingstarter/laravel-saml:dev-master \
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
