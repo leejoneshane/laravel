@@ -56,7 +56,6 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         laravel/socialite \
                         laravel/passport \
                         guzzlehttp/guzzle \
-                        kingstarter/laravel-saml:dev-master \
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
