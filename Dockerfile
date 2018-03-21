@@ -18,7 +18,6 @@ ENV CACHE_DRIVER redis
 ENV SESSION_DRIVER redis
 ADD docker-entrypoint.sh /usr/local/bin/
 ADD gencerts.sh /usr/local/bin/
-ADD composer.json /usr/local/bin/
 WORKDIR /var/www/localhost/htdocs
 
 RUN chmod 755 /usr/local/bin/*.sh \
