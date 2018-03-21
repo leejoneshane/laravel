@@ -43,9 +43,9 @@ RUN chmod 755 /usr/local/bin/*.sh \
        \
     && sed -ri \
            -e 's!^(max_execution_time = )(.*)$!\1 72000!g' \
-           -e 's!^(post_max_size = )(.*)$!\1 16M!g' \
-           -e 's!^(upload_max_filesize = )(.*)$!\1 16M!g' \
-           -e 's!^(memory_limit = )(.*)$!\1 16M!g' \
+           -e 's!^(post_max_size = )(.*)$!\1 1024M!g' \
+           -e 's!^(upload_max_filesize = )(.*)$!\1 1024M!g' \
+           -e 's!^(memory_limit = )(.*)$!\1 2048M!g' \
            "/etc/php7/php.ini" \
        \
     && rm -f index.html \
