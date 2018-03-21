@@ -33,8 +33,8 @@ RUN chmod 755 /usr/local/bin/*.sh \
            -e 's!^<Directory "/var/www/localhost/htdocs">$!<Directory "/var/www/localhost/htdocs/public">!g' \
            -e 's!^#(LoadModule rewrite_module .*)$!\1!g' \
            -e 's!^(\s*AllowOverride) None.*$!\1 All!g' \
-		   -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
-		   -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
+           -e 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g' \
+           -e 's!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g' \
            "/etc/apache2/httpd.conf" \
        \
     && sed -ri \
