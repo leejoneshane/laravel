@@ -47,6 +47,12 @@ RUN chmod 755 /usr/local/bin/*.sh \
            -e 's!^(post_max_size = )(.*)$!\1 1024M!g' \
            -e 's!^(upload_max_filesize = )(.*)$!\1 1024M!g' \
            -e 's!^(memory_limit = )(.*)$!\1 2048M!g' \
+           -e 's!^;(opcache.enable=)(.*)!\1 1!g' \
+           -e 's!^;(opcache.memory_consumption=)(.*)!\1 1280!g' \
+           -e 's!^;(opcache.max_accelerated_files=)(.*)!\1 65407!g' \
+           -e 's!^;(opcache.validate_timestamps=)(.*)!\1 0!g' \
+           -e 's!^;(opcache.save_comments=)(.*)!\1 1!g' \
+           -e 's!^;(opcache.fast_shutdown=)(.*)!\1 0!g' \
            "/etc/php7/php.ini" \
        \
     && rm -f index.html \
@@ -56,6 +62,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         laravel/socialite \
                         laravel/passport \
                         guzzlehttp/guzzle \
+                        appstract/laravel-opcache \
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
