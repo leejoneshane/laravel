@@ -59,6 +59,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
     && /usr/bin/composer create-project --no-progress --prefer-dist laravel/laravel /var/www/localhost/htdocs \
     && composer require predis/predis \
+                        tcg/voyager \
                         laravel/socialite \
                         laravel/passport \
                         guzzlehttp/guzzle \
