@@ -6,6 +6,7 @@ ENV DOMAIN server.tld
 ENV MAIL admin@admin.com
 ENV WEB_PASSWORD password
 ENV TZ Asia/Taipei
+ENV APP_KEY base64:fx/bpfXs+pQ3j7eeZP5gkqWxBtbhUpaqELdpQeeP/N8=
 ENV DB_HOST db
 ENV DB_PORT 3306
 ENV DB_DATABASE laravel
