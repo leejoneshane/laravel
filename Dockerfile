@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.7
 
 ENV FETCH no
 ENV INIT no
