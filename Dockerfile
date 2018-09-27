@@ -64,6 +64,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         laravel/passport \
                         guzzlehttp/guzzle \
                         appstract/laravel-opcache \
+                        tcg/voyager \
     && chown -R apache:apache /var/www \
     && sed -ri \
            -e '/^DB_HOST=/d' \
