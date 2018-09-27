@@ -1,21 +1,22 @@
 #!/bin/sh
 set -euo pipefail
-chown -R apache:apache /var/www
   
 if [[ "${FETCH}" == "yes" || ! -e /var/www/localhost/htdocs/artisan ]]; then
   cp -Rp /root/htdocs/* /var/www/localhost/htdocs
   cp -Rp /root/htdocs/.[^.]* /var/www/localhost/htdocs
 fi
+chown -R apache:apache /var/www
 
 if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} ${DB_DATABASE} users; then
   echo "database ready!"
 else
   php artisan migrate:refresh
   php artisan passport:install
+  php artisan voyager:install
 fi
 
 if [[ "${INIT}" == "yes" ]]; then
-#  php artisan voyager:install
+  php artisan voyager:install
   echo -e "yes\nyes\nyes\n" | php artisan migrate:refresh
   echo -e "0" | php artisan vendor:publish
   php artisan -q make:auth
