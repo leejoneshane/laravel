@@ -24,7 +24,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /var/www/localhost/htdocs
 
 RUN apk update \
-    && apk add --no-cache bash sudo git zip unzip mc curl findutils supervisor sqlite3 libcap libpng-dev python3 openldap-clients mysql-client nodejs yarn \
+    && apk add --no-cache bash sudo git zip unzip mc curl findutils supervisor sqlite libcap libjpeg-turbo-dev libpng-dev freetype-dev python3 openldap-clients mysql-client nodejs yarn \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure imap mysqli zip bcmath soap intl ldap msgpack igbinary redis swoole memcached pcov xdebug \
     && docker-php-ext-install gd imap mysqli zip bcmath soap intl ldap msgpack igbinary redis swoole memcached pcov xdebug \
