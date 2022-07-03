@@ -6,44 +6,51 @@ ENV DOMAIN server.tld
 ENV MAIL admin@admin.com
 ENV WEB_PASSWORD password
 ENV TZ Asia/Taipei
+ENV APP_NAME '國語實小官方網站'
 ENV APP_KEY base64:fx/bpfXs+pQ3j7eeZP5gkqWxBtbhUpaqELdpQeeP/N8=
-ENV DB_HOST db
+ENV DB_HOST mysql
 ENV DB_PORT 3306
 ENV DB_DATABASE laravel
 ENV DB_USERNAME root
 ENV DB_PASSWORD password
+ENV CACHE_DRIVER redis
+ENV SESSION_DRIVER redis
 ENV REDIS_HOST redis
 ENV REDIS_PORT 6379
 ENV REDIS_PASSWORD null
-ENV CACHE_DRIVER redis
-ENV SESSION_DRIVER redis
+ENV MAIL_HOST mailhog
+ENV MAIL_PORT 1025
+ENV MAIL_USERNAME null
+ENV MAIL_PASSWORD null
+ENV MAIL_ENCRYPTION null
+ENV MAIL_FROM_ADDRESS 'webmaster@tc.meps.tp.edu.tw'
+ENV MAIL_FROM_NAME "${APP_NAME}"
 
 ADD docker-entrypoint.sh /usr/local/bin/
-COPY php.ini /etc/php/8.1/cli/conf.d/laravel.ini
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-WORKDIR /var/www/localhost/htdocs
+COPY php.ini /usr/local/etc/php/conf.d/laravel.ini
+COPY supervisord.conf /etc/supervisor.d/nginx.ini
+WORKDIR /var/www/html
 
 RUN apk update \
-    && apk add --no-cache bash sudo git zip unzip mc curl findutils supervisor sqlite libcap libjpeg-turbo-dev libpng-dev freetype-dev python3 openldap-clients mysql-client nodejs yarn \
+    && apk add --no-cache bash sudo git zip unzip mc curl supervisor sqlite libcap c-client python3 openldap-clients mysql-client nodejs npm yarn nginx \
+    && apk add --no-cache icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \ 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-configure imap mysqli zip bcmath soap intl ldap msgpack igbinary redis swoole memcached pcov xdebug \
-    && docker-php-ext-install gd imap mysqli zip bcmath soap intl ldap msgpack igbinary redis swoole memcached pcov xdebug \
-    && npm install -g npm \
+    && docker-php-ext-configure imap pdo_mysql zip bcmath soap intl ldap \
+    && docker-php-ext-install gd imap pdo_mysql zip bcmath soap intl ldap \
+    && apk del icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
+    && apk cache clean \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
-    && /usr/bin/composer create-project --no-progress --prefer-dist laravel/laravel /var/www/localhost/htdocs \
+    && composer create-project --no-progress --prefer-dist laravel/laravel /var/www/html \
     && composer require predis/predis \
                         laravel/socialite \
                         laravel/passport \
-                        guzzlehttp/guzzle \
-                        appstract/laravel-opcache \
-                        tcg/voyager \
-    && chown -R apache:apache /var/www \
-    && cp -Rp /var/www/localhost/htdocs /root \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh
+                        october/october \
+    && chown -R www-data:www-data /var/www \
+    && cp -Rp /var/www/html /root \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && setcap "cap_net_bind_service=+ep" /usr/local/bin/php
 
-RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
-
-VOLUME /var/www/localhost/htdocs
-EXPOSE 80 443 
+VOLUME /var/www/html
+EXPOSE 80
 CMD ["docker-entrypoint.sh"]
