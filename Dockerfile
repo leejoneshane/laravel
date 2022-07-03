@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM php:fpm-alpine
 
 ENV FETCH no
 ENV INIT no
@@ -17,20 +17,22 @@ ENV REDIS_PORT 6379
 ENV REDIS_PASSWORD null
 ENV CACHE_DRIVER redis
 ENV SESSION_DRIVER redis
+
 ADD docker-entrypoint.sh /usr/local/bin/
-ADD gencerts.sh /usr/local/bin/
+COPY php.ini /etc/php/8.1/cli/conf.d/laravel.ini
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /var/www/localhost/htdocs
 
-RUN chmod 755 /usr/local/bin/*.sh \
-    && apk update \
-    && apk add --no-cache bash sudo git zip mc curl certbot acme-client openssl ca-certificates findutils openldap-clients \
-                          mysql-client nodejs apache2 apache2-ssl python php7-apache2 php7-ldap php7-xmlwriter php7-opcache \
-                          php7-curl php7-openssl php7-json php7-phar php7-dom php7-mysqlnd php7-pdo_mysql php7-iconv \
-                          php7-mcrypt php7-ctype php7-xml php7-mbstring php7-tokenizer php7-session php7-fileinfo php7-zlib \
+RUN apk update \
+    && apk add --no-cache bash sudo git zip unzip mc curl findutils supervisor sqlite3 libcap libpng-dev python3 openldap-clients mysql-client nodejs yarn \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure imap mysqli zip bcmath soap intl ldap msgpack igbinary redis swoole memcached pcov xdebug \
+    && docker-php-ext-install gd imap mysqli zip bcmath soap intl ldap msgpack igbinary redis swoole memcached pcov xdebug \
+    && npm install -g npm \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && mkdir /run/apache2 \
     && sed -ri \
-           -e 's!^DocumentRoot "/var/www/localhost/htdocs"$!DocumentRoot "/var/www/localhost/htdocs/public"!g' \
+           -e 's!^DocumentRoot "/var/www/localhost/htdocs"$!DocumentRoot "/var/www/loczip alhost/htdocs/public"!g' \
            -e 's!^<Directory "/var/www/localhost/htdocs">$!<Directory "/var/www/localhost/htdocs/public">!g' \
            -e 's!^#(LoadModule rewrite_module .*)$!\1!g' \
            -e 's!^(\s*AllowOverride) None.*$!\1 All!g' \
@@ -54,7 +56,7 @@ RUN chmod 755 /usr/local/bin/*.sh \
            -e 's!^;(opcache.validate_timestamps=)(.*)!\1 0!g' \
            -e 's!^;(opcache.save_comments=)(.*)!\1 1!g' \
            -e 's!^;(opcache.fast_shutdown=)(.*)!\1 0!g' \
-           "/etc/php7/php.ini" \
+           "/etc/php/8.1/cli/conf.d/laravel.ini" \
        \
     && rm -f index.html \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
@@ -66,19 +68,10 @@ RUN chmod 755 /usr/local/bin/*.sh \
                         appstract/laravel-opcache \
                         tcg/voyager \
     && chown -R apache:apache /var/www \
-    && sed -ri \
-           -e '/^DB_HOST=/d' \
-           -e '/^DB_PORT=/d' \
-           -e '/^DB_DATABASE=/d' \
-           -e '/^DB_USERNAME=/d' \
-           -e '/^DB_PASSWORD=/d' \
-           -e '/^REDIS_HOST=/d' \
-           -e '/^REDIS_PORT=/d' \
-           -e '/^REDIS_PASSWORD=/d' \
-           -e '/^CACHE_DRIVER=/d' \
-           -e '/^SESSION_DRIVER=/d' \
-           /var/www/localhost/htdocs/.env \
-    && cp -Rp /var/www/localhost/htdocs /root
+    && cp -Rp /var/www/localhost/htdocs /root \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh
+
+RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
 VOLUME /var/www/localhost/htdocs
 EXPOSE 80 443 
