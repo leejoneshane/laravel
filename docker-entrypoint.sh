@@ -24,4 +24,4 @@ if [[ "${INIT}" == "yes" ]]; then
   php artisan cache:clear
 fi
 
-exec supervisorctl start nginx
+exec php-fpm

@@ -1,8 +1,7 @@
 version: '3'
 services:
   laravel:
-    build:
-      dockerfile: Dockerfile
+    build: .
     image: leejoneshane/laravel
     extra_hosts:
       - host.docker.internal:host-gateway
@@ -15,10 +14,10 @@ services:
       WEB_PASSWORD: 123456
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
-      REDIS_HOST: cache
+      REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: null
-      DB_HOST: db
+      DB_HOST: mysql
       DB_PORT: 3306
       DB_DATABASE: laravel
       DB_USERNAME: root
@@ -26,9 +25,14 @@ services:
       XDEBUG_MODE: 'off'
       XDEBUG_CONFIG: client_host=host.docker.internal
     volumes:
-      - www:/var/www/localhost/htdocs
+      - www:/var/www/html
     networks:
       - backend
+    depends_on:
+      - mysql
+      - redis
+      - meilisearch
+      - mailhog
       
   redis:
     image: redis
@@ -58,6 +62,7 @@ services:
       
   mysql:
     image: mysql
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: laravel
