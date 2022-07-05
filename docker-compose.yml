@@ -24,6 +24,8 @@ services:
       DB_PASSWORD: 123456
       XDEBUG_MODE: 'off'
       XDEBUG_CONFIG: client_host=host.docker.internal
+      MEILISEARCH_HOST: http://melisearch:7700
+      MEILISEARCH_KEY: masterKey
     volumes:
       - www:/var/www/html
     networks:
@@ -43,6 +45,9 @@ services:
     image: getmeili/meilisearch:latest
     ports:
       - 7700:7700
+    environment:
+      MEILI_MASTER_KEY: masterKey
+      MEILI_ENV: production
     volumes:
       - www:/meili_data
     networks:

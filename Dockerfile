@@ -28,6 +28,9 @@ ENV MAIL_PASSWORD null
 ENV MAIL_ENCRYPTION null
 ENV MAIL_FROM_ADDRESS 'webmaster@tc.meps.tp.edu.tw'
 ENV MAIL_FROM_NAME 'My Site'
+ENV SCOUT_DRIVER meilisearch
+ENV MEILISEARCH_HOST http://melisearch:7700
+ENV MEILISEARCH_KEY masterKey
 
 WORKDIR /var/www/html
 
@@ -45,9 +48,9 @@ RUN apk update \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www/html \
-    && composer require laravel/socialite \
+    && composer require http-interop/http-factory-guzzle \
+                        laravel/socialite \
                         laravel/passport \
-                        october/october \
     && chown -R www-data:www-data /var/www \
     && cp -Rp /var/www/html /root \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php

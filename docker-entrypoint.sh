@@ -10,8 +10,10 @@ chown -R www-data:www-data /var/www
 if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} ${DB_DATABASE} users; then
   echo "database ready!"
 else
+  composer require meilisearch/meilisearch-php laravel/telescope laravel/scout
   php artisan migrate:refresh
   php artisan passport:install
+  php artisan telescope:install
 fi
 
 if [[ "${INIT}" == "yes" ]]; then
