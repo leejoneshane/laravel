@@ -12,7 +12,6 @@ if mysqlshow --host=${DB_HOST} --user=${DB_USERNAME} --password=${DB_PASSWORD} $
 else
   php artisan migrate:refresh
   php artisan passport:install
-  php artisan october:install
 fi
 
 if [[ "${INIT}" == "yes" ]]; then
@@ -24,4 +23,4 @@ if [[ "${INIT}" == "yes" ]]; then
   php artisan cache:clear
 fi
 
-exec php-fpm
+supervisord -n -c /etc/supervisord.conf

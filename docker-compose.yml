@@ -62,7 +62,7 @@ services:
       
   mysql:
     image: mysql
-    command: [ "--default-authentication-plugin=mysql_native_password" ]
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: laravel
@@ -71,6 +71,8 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
     ports:
       - 8080:80
     networks:
