@@ -43,7 +43,8 @@ RUN apk update \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www/html \
-    && composer require http-interop/http-factory-guzzle \
+    && composer require doctrine/dbal \
+                        http-interop/http-factory-guzzle \
                         laravel/socialite \
                         laravel/passport \
     && chown -R www-data:www-data /var/www \
