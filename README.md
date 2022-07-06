@@ -4,7 +4,7 @@ This is a docker image for PHP framework: laravel, it has pre-installed laravel 
 
 # How to use
 
-We recommend that you use docker-compose to build the service container, which will create the mysql database container and phpmyadmin management tool container for you. In order to facilitate your website development, mailhog, melisearch, redis servers will also be created.
+We recommend that you use docker-compose to build the service containers, which will create the mysql database service and phpmyadmin management tool for you. In order to facilitate your website development, mailhog, melisearch, redis servers will also be created.
 
 # First time running
 
@@ -14,4 +14,4 @@ The current directory will be mounted into the container as the home directory o
 
 # Work with SSL
 
-This container does not support https, please use traefik or other similar tools to obtain a free TLS key for you.
+This docker image does not support https, please use traefik or other similar tools to obtain a free TLS key for you.
