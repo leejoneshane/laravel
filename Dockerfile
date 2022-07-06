@@ -3,11 +3,6 @@ FROM php:fpm-alpine
 # what system type to compiler: intel cpu (below) or apple m1 (use 'armv7-pc-linux-musl')
 ARG SYSTEM x86_64-pc-linux-musl
 
-ENV FETCH no
-ENV INIT no
-ENV DOMAIN server.tld
-ENV MAIL admin@admin.com
-ENV WEB_PASSWORD password
 ENV TZ Asia/Taipei
 ENV APP_NAME 'My Site'
 ENV APP_KEY base64:fx/bpfXs+pQ3j7eeZP5gkqWxBtbhUpaqELdpQeeP/N8=
