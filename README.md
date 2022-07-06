@@ -9,7 +9,7 @@ We recommend that you use docker-compose to build the service containers, which 
 # First time running
 
 The current directory will be mounted into the container as the home directory of the website: /var/www/html, and the following two commands can be used with docker exec command:
-* __fetch__: If you accidentally delete a file and cause your website to get an HTTP 500 error, you can use this command to rebuild the website directory and get back the deleted file, but make sure to backup first so that you don't waste your hard work.
+* __fetch__: If you accidentally delete a file and cause your website to get an HTTP 500 error, you can use this command to rebuild the website directory and get back the deleted directory and file(s), but make sure to backup first so that you don't waste your hard work.
 * __init__: If you need to rebuild the data table, please use this command.
 
 # Work with SSL
