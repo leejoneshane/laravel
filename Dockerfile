@@ -45,6 +45,7 @@ RUN apk update \
 RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www/html \
     && composer require doctrine/dbal \
                         http-interop/http-factory-guzzle \
+                        google/apiclient \
                         laravel/socialite \
                         laravel/passport \
     && chown -R www-data:www-data /var/www \
