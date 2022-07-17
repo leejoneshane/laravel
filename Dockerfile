@@ -62,4 +62,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /var/www/html
 EXPOSE 80
-CMD ["docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
