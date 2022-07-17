@@ -9,9 +9,14 @@ services:
       - 80:80
       - 5173:5173
     environment:
-      DOMAIN: www.your.com
-      MAIL: leejoneshane@gmail.com
-      WEB_PASSWORD: 123456
+      TZ: Asia/Taipei
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      MAIL_USERNAME: null
+      MAIL_PASSWORD: null
+      MAIL_ENCRYPTION: null
+      MAIL_FROM_ADDRESS: your@gmail.com
+      MAIL_FROM_NAME: My Web Site
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       REDIS_HOST: redis
