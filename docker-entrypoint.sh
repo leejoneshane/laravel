@@ -1,7 +1,7 @@
 #!/bin/sh
 set -euo pipefail
   
-if [[ "$1" -eq "fetch" || ! -e /var/www/html/artisan ]]; then
+if [[ ! -e /var/www/html/artisan ]]; then
   cp -Rp /root/html/* /var/www/html
   cp -Rp /root/html/.[^.]* /var/www/html
   chown -R www-data:www-data /var/www
