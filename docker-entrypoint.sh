@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ "$1" == 'fetch' || ! -e /var/www/html/artisan ]; then
+if [ "$1" == 'fetch' ] || [[ ! -e /var/www/html/artisan ]]; then
   cp -Rp /root/html/* /var/www/html
   cp -Rp /root/html/.[^.]* /var/www/html
   chown -R www-data:www-data /var/www
