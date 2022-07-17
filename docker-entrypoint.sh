@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [[ "$1" -eq 'fetch' || ! -e /var/www/html/artisan ]]; then
+if [ "$1" == 'fetch' || ! -e /var/www/html/artisan ]; then
   cp -Rp /root/html/* /var/www/html
   cp -Rp /root/html/.[^.]* /var/www/html
   chown -R www-data:www-data /var/www
@@ -16,7 +16,7 @@ else
   php artisan telescope:install
 fi
 
-if [[ "$1" -eq 'init' ]]; then
+if [ "$1" == 'init' ]; then
   echo -e "yes\nyes\nyes\n" | php artisan migrate:refresh
   echo -e "0" | php artisan vendor:publish
   php artisan -q make:auth
