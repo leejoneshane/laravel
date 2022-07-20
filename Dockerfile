@@ -5,7 +5,6 @@ ARG SYSTEM x86_64-pc-linux-musl
 
 ENV TZ Asia/Taipei
 ENV APP_NAME 'My Site'
-ENV APP_KEY base64:fx/bpfXs+pQ3j7eeZP5gkqWxBtbhUpaqELdpQeeP/N8=
 ENV DB_HOST mysql
 ENV DB_PORT 3306
 ENV DB_DATABASE laravel
