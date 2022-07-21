@@ -47,6 +47,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         google/apiclient \
                         laravel/socialite \
                         laravel/passport \
+    && npm install bootstrap \
     && chown -R www-data:www-data /var/www \
     && cp -Rp /var/www/html /root \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php
