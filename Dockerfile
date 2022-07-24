@@ -47,9 +47,10 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         google/apiclient \
                         laravel/socialite \
                         laravel/passport \
-    && npx @preset/cli apply laravel:vite \
-    && npm install tailwindcss postcss autoprefixer @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio \
-    && setcap "cap_net_bind_service=+ep" /usr/local/bin/php
+                        laravel/ui \
+                        innocenzi/laravel-vite \
+    && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
+    && npm install tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
 
 ADD docker-entrypoint.sh /usr/local/bin/
 COPY php.ini /usr/local/etc/php/conf.d/laravel.ini
@@ -59,7 +60,7 @@ COPY supervisord.conf /etc/supervisord.conf
 COPY vite.config.ts /var/www/html/vite.config.ts
 COPY tailwind.config.js /var/www/html/tailwind.config.js
 
-RUN && chown -R www-data:www-data /var/www \
+RUN chown -R www-data:www-data /var/www \
     && cp -Rp /var/www/html /root \
     && chmod +x /usr/local/bin/docker-entrypoint.sh
 
