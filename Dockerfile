@@ -50,6 +50,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         laravel/ui \
                         innocenzi/laravel-vite \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
+    && composer update \
     && npm install tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
 
 ADD docker-entrypoint.sh /usr/local/bin/
