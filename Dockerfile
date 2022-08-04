@@ -49,6 +49,16 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         laravel/passport \
                         laravel/ui \
                         innocenzi/laravel-vite \
+                        beyondcode/laravel-websockets \
+                        socialiteproviders/google \
+                        socialiteproviders/facebook \
+                        socialiteproviders/yahoo \
+                        socialiteproviders/line \
+                        beyondcode/laravel-websockets \
+    && composer -q remove laravel/sail \
+    && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
+    && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations" \
+    && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
     && composer update \
     && npm install tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
