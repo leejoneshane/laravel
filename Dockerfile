@@ -55,7 +55,6 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         socialiteproviders/yahoo \
                         socialiteproviders/line \
                         beyondcode/laravel-websockets \
-    && composer -q remove laravel/sail \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
     && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations" \
     && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config" \
