@@ -60,7 +60,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
     && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
     && composer update \
-    && npm install tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
+    && npm install axios tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
 
 ADD docker-entrypoint.sh /usr/local/bin/
 COPY php.ini /usr/local/etc/php/conf.d/laravel.ini
