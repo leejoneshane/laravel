@@ -76,4 +76,4 @@ RUN chown -R www-data:www-data /var/www \
 
 VOLUME /var/www/html
 EXPOSE 80 5173
-ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["docker-entrypoint.sh"]
