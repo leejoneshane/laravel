@@ -34,8 +34,9 @@ RUN apk update \
     && echo -e "yes\nyes\nno\n" | pecl install igbinary redis \
     && echo -e "no\nyes\nyes\nyes\nno\n" | pecl install swoole \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-configure imap pdo_mysql zip bcmath soap intl ldap --host=${SYSTEM} --target=${SYSTEM}\
-    && docker-php-ext-install gd imap pdo_mysql zip bcmath soap intl ldap \
+    && docker-php-ext-install gd imap pdo_mysql zip bcmath soap intl ldap opcache \
     && docker-php-ext-enable swoole igbinary redis gd imap pdo_mysql zip bcmath soap intl ldap \
     && apk del pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
