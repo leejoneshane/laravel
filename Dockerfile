@@ -50,16 +50,12 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         laravel/passport \
                         laravel/ui \
                         innocenzi/laravel-vite \
-                        beyondcode/laravel-websockets \
                         socialiteproviders/google \
                         socialiteproviders/facebook \
                         socialiteproviders/yahoo \
                         socialiteproviders/line \
-                        beyondcode/laravel-websockets \
                         appstract/laravel-opcache \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
-    && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations" \
-    && php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config" \
     && php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
     && composer update \
