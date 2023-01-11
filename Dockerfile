@@ -55,6 +55,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         socialiteproviders/yahoo \
                         socialiteproviders/line \
                         appstract/laravel-opcache \
+                        jenssegers/agent \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
     && php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
