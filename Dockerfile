@@ -50,7 +50,6 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         laravel/socialite \
                         laravel/passport \
                         laravel/ui \
-                        innocenzi/laravel-vite \
                         socialiteproviders/google \
                         socialiteproviders/facebook \
                         socialiteproviders/yahoo \
@@ -64,10 +63,6 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
     && npm install axios tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
 
 ADD docker-entrypoint.sh /usr/local/bin/
-COPY php.ini /usr/local/etc/php/conf.d/laravel.ini
-COPY nginx.conf /etc/nginx/http.d/default.conf
-COPY crontab /etc/crontabs/root
-COPY supervisord.conf /etc/supervisord.conf
 COPY vite.config.ts /var/www/html/vite.config.ts
 COPY tailwind.config.js /var/www/html/tailwind.config.js
 
@@ -75,6 +70,11 @@ RUN chown -R www-data:www-data /var/www \
     && cp -Rp /var/www/html /root \
     && chmod +x /usr/local/bin/docker-entrypoint.sh
 
+COPY php.ini /usr/local/etc/php/conf.d/laravel.ini
+COPY nginx.conf /etc/nginx/http.d/default.conf
+COPY crontab /etc/crontabs/root
+COPY supervisord.conf /etc/supervisord.conf
+
 VOLUME /var/www/html
-EXPOSE 80 5173 6001
+EXPOSE 80 5173
 ENTRYPOINT ["docker-entrypoint.sh"]
