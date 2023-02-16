@@ -63,7 +63,6 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
     && npm install axios tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
 
 ADD docker-entrypoint.sh /usr/local/bin/
-COPY vite.config.ts /var/www/html/vite.config.ts
 COPY postcss.config.js /var/www/html/postcss.config.js
 COPY tailwind.config.js /var/www/html/tailwind.config.js
 
