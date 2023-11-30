@@ -57,7 +57,6 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         appstract/laravel-opcache \
                         jenssegers/agent \
                         barryvdh/laravel-dompdf \
-                        seblucas/tbszip \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
     && php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
