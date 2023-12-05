@@ -66,6 +66,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
 ADD docker-entrypoint.sh /usr/local/bin/
 COPY postcss.config.js /var/www/html/postcss.config.js
 COPY tailwind.config.js /var/www/html/tailwind.config.js
+COPY php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN chown -R www-data:www-data /var/www \
     && cp -Rp /var/www/html /root \
