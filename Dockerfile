@@ -29,7 +29,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN apk update \
     && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openssl openldap-clients mysql-client nodejs npm yarn nginx \
-    && apk add --no-cache pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \ 
+    && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \ 
     && echo -e "yes\nyes\nno\n" | pecl install igbinary redis \
     && echo -e "no\nyes\nyes\nyes\nno\n" | pecl install swoole \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
