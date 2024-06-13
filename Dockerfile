@@ -28,15 +28,16 @@ ENV MEILISEARCH_KEY masterKey
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN apk update \
-    && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openssl openldap-clients mysql-client nodejs npm yarn nginx \
+    && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openssl openldap-clients mysql-client nodejs npm yarn nginx libgomp \
     && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \ 
     && echo -e "yes\nyes\nno\n" | pecl install igbinary redis \
     && echo -e "no\nyes\nyes\nyes\nno\n" | pecl install swoole \
+    && pecl install imagick \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-configure imap pdo_mysql zip bcmath soap intl ldap --host=${SYSTEM} --target=${SYSTEM}\
     && docker-php-ext-install gd imap pdo_mysql zip bcmath soap intl ldap opcache \
-    && docker-php-ext-enable swoole igbinary redis gd imap pdo_mysql zip bcmath soap intl ldap \
+    && docker-php-ext-enable imagick swoole igbinary redis gd imap pdo_mysql zip bcmath soap intl ldap \
     && apk del pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
@@ -56,6 +57,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         jenssegers/agent \
                         barryvdh/laravel-dompdf \
                         convertapi/convertapi-php \
+                        simplesoftwareio/simple-qrcode \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
     && php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
