@@ -18,7 +18,8 @@ WORKDIR /var/www/html
 
 RUN apk update \
     && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openssl openldap-clients mysql-client nodejs npm yarn nginx libgomp \
-    && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \ 
+    && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
+    && apk add --no-cache libreoffice libreoffice-lang-zh_tw \ 
     && echo -e "yes\nyes\nno\n" | pecl install igbinary redis \
     && echo -e "no\nyes\nyes\nyes\nno\n" | pecl install swoole \
     && echo -e "\n" | pecl install -o -f imagick \
@@ -44,8 +45,7 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         socialiteproviders/line \
                         appstract/laravel-opcache \
                         jenssegers/agent \
-                        barryvdh/laravel-dompdf \
-                        convertapi/convertapi-php \
+                        ncjoes/office-converter \
                         simplesoftwareio/simple-qrcode \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
     && php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config" \
