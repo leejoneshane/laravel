@@ -19,7 +19,7 @@ WORKDIR /var/www/html
 RUN apk update \
     && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openssl openldap-clients mysql-client nodejs npm yarn nginx libgomp \
     && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
-    && apk add --no-cache libreoffice libreoffice-lang-zh_tw \ 
+    && apk add --no-cache libreoffice libreoffice-lang-zh_tw openjdk17 font-noto-cjk \ 
     && echo -e "yes\nyes\nno\n" | pecl install igbinary redis \
     && echo -e "no\nyes\nyes\nyes\nno\n" | pecl install swoole \
     && echo -e "\n" | pecl install -o -f imagick \
@@ -45,12 +45,15 @@ RUN composer create-project --no-progress --prefer-dist laravel/laravel /var/www
                         socialiteproviders/line \
                         appstract/laravel-opcache \
                         jenssegers/agent \
+                        krustnic/docx-merge \
                         ncjoes/office-converter \
                         simplesoftwareio/simple-qrcode \
     && php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider" \
     && php artisan vendor:publish --provider="Appstract\Opcache\OpcacheServiceProvider" --tag="config" \
     && setcap "cap_net_bind_service=+ep" /usr/local/bin/php \
     && composer update \
+    && mkdir -p /var/www/html/vendor/DocxMerge/DocxMerge \
+    && cp /var/www/html/vendor/krustnic/docx-merge/* /var/www/html/vendor/DocxMerge/DocxMerge \
     && npm install axios tailwindcss postcss autoprefixer @preset/cli @tailwindcss/typography @tailwindcss/forms @tailwindcss/line-clamp @tailwindcss/aspect-ratio
 
 COPY supervisord.conf /etc/supervisord.conf
