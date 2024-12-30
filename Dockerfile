@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 ENV TZ=Asia/Taipei
 ENV APP_NAME='My Site'
@@ -15,8 +15,8 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /var/www/html
 
 RUN apk update \
-    && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openssl openldap-clients mysql-client nodejs npm yarn nginx libgomp \
-    && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
+    && apk add --no-cache bash sudo git zip unzip mc supervisor sqlite libcap freetype libpng libjpeg-turbo libzip c-client imap krb5 python3 openldap-clients mysql-client nodejs npm yarn nginx libgomp \
+    && apk add --no-cache imagemagick-dev pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
     && apk add --no-cache libreoffice libreoffice-lang-zh_tw openjdk17 font-noto-cjk \ 
     && echo -e "yes\nyes\nno\n" | pecl install igbinary redis \
     && echo -e "no\nyes\nyes\nyes\nno\n" | pecl install swoole \
@@ -26,7 +26,7 @@ RUN apk update \
     && docker-php-ext-configure imap pdo_mysql zip bcmath soap intl ldap --host=${SYSTEM} --target=${SYSTEM}\
     && docker-php-ext-install gd imap pdo_mysql zip bcmath soap intl ldap opcache \
     && docker-php-ext-enable imagick swoole igbinary redis gd imap pdo_mysql zip bcmath soap intl ldap \
-    && apk del pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openssl-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
+    && apk del pcre-dev $PHPIZE_DEPS openssl-dev curl-dev icu-dev libxml2-dev libzip-dev imap-dev krb5-dev openldap-dev zlib-dev libjpeg-turbo-dev libpng-dev freetype-dev \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
